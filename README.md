@@ -20,6 +20,8 @@ bs -> psp2
 @enduml 
 -->
 
+![](docs/media/img1.svg)
+
 The platform provides the following services  :
 
 - CheckIban
