@@ -28,17 +28,17 @@ The platform provides the following services  :
 - Payment Instruments
 
 ### Check-Iban
+
 This service lets the client retrieve the account holder validation for a specific fiscal code.
 
-_TBD_
-
-### Payment Instruments
+### Search Payment Instruments ( SPI service)
 
 This service lets the client retrieve the payment instruments for a specific fiscal code.
+It has two operations :
 
-Banking Services platform ( named BS ) provides the search payment instruments service.
-BS is connected to many `card services` in order to enquiring , each service search 
-The Services inq
+- [POST] _searchPaymentInstrumentsUsingPOST_ : this operation search payment instruments for a specific fiscal code, it returns a complete list or a _request-id_
+- [GET] _searchPaymentInstrumentsUsingGET_ : this operations retrieve a search results by its _request-id_
 
+for North API, see documentation [here](north-api/pagopa_swagger_SPI.json)
 
-This endpoint lets the user retrieve the payment instruments for a specific fiscal code.
+for South API, see documentation _TBD_
