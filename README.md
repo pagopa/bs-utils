@@ -1,5 +1,7 @@
 # bs-utils
+
 A collective list of APIs for PSP Added Value Services search payment instruments
+Official Product documentation is available [here](https://bankingservices.pagopa.it/docs/platform/apis/pagopa-banking-v4.0)
 
 ## Overview
 Banking Services platform ( named `BS` ) is connected to many value added value services ( `VAS` ) provided by Payment Services Providers in order to provides a common API interfaces to Public Administration Clients.
@@ -30,6 +32,8 @@ The platform provides the following services  :
 ### Check-Iban
 
 This service lets the client retrieve the account holder validation for a specific fiscal code.
+
+for complete description , see [here](https://bankingservices.pagopa.it/docs/platform/apis/pagopa-banking-v4.0)
 
 ### Search Payment Instruments ( SPI service)
 
