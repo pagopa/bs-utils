@@ -1,6 +1,6 @@
 # bs-utils
 
-A collective list of APIs for PSP Added Value Services for Banking Services Platform
+A collective list of APIs for PSP Added Value Services for Banking Services Platform.
 Official Product documentation is available [here](https://bankingservices.pagopa.it/docs/platform/apis/pagopa-banking-v4.0)
 
 ## Overview
