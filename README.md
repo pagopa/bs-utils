@@ -8,16 +8,27 @@ Banking Services platform ( named `BS` ) is connected to many value added value 
 
 
 <!-- 
-@startuml docs/media/img1
-autonumber 
-component bs as "Banking Services"
-component psp1 as "PSP 1 VAS A" 
-component psp2 as "PSP 2 VAS A"
-component client as "Client"
 
-client -> bs
-bs -> psp1
-bs -> psp2
+NOTE : after every change to uml diagram typing 👍
+
+```
+plantuml -tsvg README.md
+```
+
+-->
+
+<!-- 
+@startuml docs/media/img1
+
+autonumber 
+participant bs as "Banking Services"
+participant psp1 as "PSP 1 VAS A" 
+participant psp2 as "PSP 2 VAS A"
+participant client as "Client"
+
+client -> bs : Message1
+bs -> psp1 : Message2
+bs -> psp2 : Message3
 
 @enduml 
 -->
@@ -46,3 +57,14 @@ It has two operations :
 for North API, see documentation [here](north-api/pagopa_swagger_SPI.json)
 
 for South API, see documentation _TBD_
+
+### Developer guidelines
+
+To create an api client starting from specifications typing : 
+
+```
+yarn install && yarn generate
+```
+
+if all right under `generated/bs-utils-api/` you'll see auto-generated client and models.
+
