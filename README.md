@@ -1,5 +1,11 @@
 # bs-utils
 
+- [bs-utils](#bs-utils)
+  - [Overview](#overview)
+    - [Check-Iban](#check-iban)
+    - [Search Payment Instruments ( SPI service)](#search-payment-instruments--spi-service)
+    - [Developer guidelines](#developer-guidelines)
+
 A collective list of APIs for PSP Added Value Services for Banking Services Platform.
 Official Product documentation is available [here](https://bankingservices.pagopa.it/docs/platform/apis/pagopa-banking-v4.0)
 
