@@ -50,7 +50,11 @@ The platform provides the following services  :
 
 This service lets the client retrieve the account holder validation for a specific fiscal code.
 
+for North API , see documentation [here](north-api/checkIban_north_api.yaml)
+for South API, see documentation [here](south-api/checkIban_south_default_api.yaml)
 for complete description , see [here](https://bankingservices.pagopa.it/docs/platform/apis/pagopa-banking-v4.0)
+
+
 
 ### Search Payment Instruments ( SPI service)
 
@@ -60,17 +64,16 @@ It has two operations :
 - [POST] _searchPaymentInstrumentsUsingPOST_ : this operation search payment instruments for a specific fiscal code, it returns a complete list or a _request-id_
 - [GET] _searchPaymentInstrumentsUsingGET_ : this operations retrieve a search results by its _request-id_
 
-for North API, see documentation [here](north-api/pagopa_swagger_SPI.json)
+for North API, see documentation [here](north-api/spi_north_api.yaml)
 
-for South API, see documentation _TBD_
+for South API, see documentation [here](south-api/spi_south_default_api.yaml)
 
 ### Developer guidelines
 
 To create an api client starting from specifications typing : 
 
-```
+``` console
 yarn install && yarn generate
 ```
 
 if all right under `generated/bs-utils-api/` you'll see auto-generated client and models.
-
