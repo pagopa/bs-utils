@@ -52,9 +52,8 @@ This service lets the client retrieve the account holder validation for a specif
 
 for North API , see documentation [here](north-api/checkIban_north_api.yaml)
 for South API, see documentation [here](south-api/checkIban_south_default_api.yaml)
+
 for complete description , see [here](https://bankingservices.pagopa.it/docs/platform/apis/pagopa-banking-v4.0)
-
-
 
 ### Search Payment Instruments ( SPI service)
 
