@@ -1,16 +1,16 @@
 swagger: '2.0'
 info:
   title: PagoPA Search Payment Instruments
-  version: '4.0.0'
-host: '<domain-for-pagopa>'
-basePath: /api/pagopa/banking/v4.0/utils
+  version: '1.0.0'
+host: '<service-provider-domain>'
+basePath: /<service-provider-basepath>
 tags:
-  - name: PagoPA Search Payment Instruments Service
+  - name: Search Payment Instruments Service / Southbound Interface
 paths:
   '/payment-instruments/search':
     post:
       tags:
-        - PagoPA Search Payment Instruments Service
+        - Search Payment Instruments Service / Southbound Interface
       operationId: searchPaymentInstrumentsUsingPOST
       summary: Searches for the known payment instruments.
       consumes:
@@ -19,8 +19,8 @@ paths:
         - application/json
       parameters:
         - in: body
-          name: singlePaymentModelInput
-          description: singlePaymentModelInput
+          name: searchPaymentInstrumentsModelInput
+          description: searchPaymentInstrumentsModelInput
           required: true
           schema:
             $ref: '#/definitions/SearchPaymentInstrumentsModelInput'
@@ -40,51 +40,23 @@ paths:
         '502':
           description: Bad Gateway
       deprecated: false
-  
-  '/payment-instruments/{searchRequestId}':
-    get:
-      tags:
-        - PagoPA Search Payment Instruments Service
-      operationId: searchPaymentInstrumentsUsingGET
-      summary: Retrieves an asynchronous search request.
-      produces:
-        - application/json
-      parameters:
-        - in: path
-          name: searchRequestId
-          type: string
-          description: singlePaymentModelInput
-          required: true
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/SearchPaymentInstrumentsModelOutput'
-        '400':
-          description: Bad Request
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-        '502':
-          description: Bad Gateway
-      deprecated: false
-  
 
 definitions:
 
   SearchPaymentInstrumentsModelInput:
     type: object
     properties:
+      correlationId:
+        type: string
+        example: "6773c6a6-d279-4c2a-9d00-0a2cd0b5c92c"
+        description: "A request-side UUID to be returned in the response."
       fiscalCode:
         type: string
         example: "ABCDEF12L12A123K"
         description: "The fiscal code of the payment intrument owner to search for."
       productType:
         type: string
-        enum: [PP, DB, PRIVATIVE]
+        enum: [CREDIT, PREPAID, DEBIT, PRIVATIVE]
         description: "The type of the payment intrument to search for."
       abiCode:
         type: string
@@ -94,11 +66,11 @@ definitions:
         type: string
         example: "123456789012345"
         description: "The PAN of the payment intrument to search for."
-      acquirerId:
+      enrollmentDate:
         type: string
-        example: ""
-        description: "TBD"
-    required: [fiscalCode, productType]
+        example: "2021-01-01"
+        description: "The enrollment date"
+    required: [fiscalCode, productType, enrollmentDate]
     title: SearchPaymentInstrumentsModelInput
 
   SearchPaymentInstrumentsModelOutput:
@@ -115,23 +87,6 @@ definitions:
         $ref: '#/definitions/SearchPaymentInstrumentsModelOutputPayload'
     title: ValidateAccountHolderModelOutput
 
-  MessagesModelOutput:
-    type: array
-    items:
-      $ref: "#/definitions/MessagesElementModelOutput"
-    title: MessagesModelOutput
-
-  MessagesElementModelOutput:
-    type: object
-    properties:
-      serviceProviderName:
-        type: string
-      retrievedInstrumentsCount:
-        type: integer
-      executionStatus:
-        type: string
-    title: MessagesElementModelOutput
-
   DataModelOutput:
     type: array
     items:
@@ -147,6 +102,7 @@ definitions:
         type: string
       expiringDate:
         type: string
+        example: "2025-03-24"
       productType:
         type: string
         enum: [CREDIT, PREPAID, DEBIT, PRIVATIVE]
@@ -161,13 +117,11 @@ definitions:
   SearchPaymentInstrumentsModelOutputPayload:
     type: object
     properties:
-      searchRequestId:
+      correlationId:
         type: string
-        description: "The search request ID."
+        example: "6773c6a6-d279-4c2a-9d00-0a2cd0b5c92c"
       paymentInstruments:
         $ref: "#/definitions/DataModelOutput"
-      searchRequestMetadata:
-        $ref: "#/definitions/MessagesModelOutput"
     required: [requestId, data, messages]
     title: SearchPaymentInstrumentsModelOutputPayload
 
