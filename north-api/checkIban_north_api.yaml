@@ -1,0 +1,182 @@
+swagger: "2.0"
+info:
+  description: Southbound interface specification
+  version: "4.0"
+  title: Banking Services
+host: '<domain-for-pagopa>'
+basePath: /
+tags:
+- name: APIs
+  description: Validator Controller
+paths:
+  /validate-account-holder:
+    post:
+      tags:
+      - APIs
+      summary: ""
+      operationId: validateAccountHolderUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - '*/*'
+      parameters:
+      - in: body
+        name: inputModel
+        description: Validates the provided account number and holder data.
+        required: true
+        schema:
+          $ref: '#/definitions/ValidateAccountHolderRequestModel'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseModel%3CValidateAccountHolderResponseModel%3E'
+definitions:
+  AccountHolderRequestModel:
+    type: object
+    required:
+    - type
+    properties:
+      fiscalCode:
+        type: string
+        description: The identification data of the account holder, if natural person (Italian Codice Fiscale). Required field if type == 'PERSON_NATURAL'.
+      taxCode:
+        type: string
+        description: The identification data of the account holder, if legal person (Italian Codice Fiscale Aziendale). Required field if type == 'PERSON_LEGAL'.
+      type:
+        type: string
+        description: The type of account holder, used to decline the holderId.
+        enum:
+        - PERSON_LEGAL
+        - PERSON_NATURAL
+      vatCode:
+        type: string
+        description: The identification data of the account holder, if legal person (Italian Partita IVA). Required field if type == 'PERSON_LEGAL'.
+    title: AccountHolderRequestModel
+  AccountHolderResponseModel:
+    type: object
+    properties:
+      fiscalCode:
+        type: string
+        description: The identification data of the account holder, if natural person (Italian Codice Fiscale). Required field if type == 'PERSON_NATURAL'.
+      taxCode:
+        type: string
+        description: The identification data of the account holder, if legal person (Italian Codice Fiscale Aziendale). Required field if type == 'PERSON_LEGAL'.
+      type:
+        type: string
+        description: The type of account holder, used to decline the holderId.
+        enum:
+        - PERSON_LEGAL
+        - PERSON_NATURAL
+      vatCode:
+        type: string
+        description: The identification data of the account holder, if legal person (Italian Partita IVA). Required field if type == 'PERSON_LEGAL'.
+    title: AccountHolderResponseModel
+  AccountRequestModel:
+    type: object
+    required:
+    - value
+    - valueType
+    properties:
+      bicCode:
+        type: string
+        description: The international bic code.
+      value:
+        type: string
+        description: The account number.
+      valueType:
+        type: string
+        description: The account number type.
+        enum:
+        - IBAN
+    title: AccountRequestModel
+  AccountResponseModel:
+    type: object
+    required:
+    - value
+    - valueType
+    properties:
+      bicCode:
+        type: string
+        description: The international bic code.
+      value:
+        type: string
+        description: The account number.
+      valueType:
+        type: string
+        description: The account number type.
+        enum:
+        - IBAN
+    title: AccountResponseModel
+  BankInfoModel:
+    type: object
+    properties:
+      bicCode:
+        type: string
+      branchName:
+        type: string
+      businessName:
+        type: string
+      city:
+        type: string
+      countryCode:
+        type: string
+    title: BankInfoModel
+  ErrorModel:
+    type: object
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      params:
+        type: string
+    title: ErrorModel
+  ResponseModel<ValidateAccountHolderResponseModel>:
+    type: object
+    properties:
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/ErrorModel'
+      payload:
+        $ref: '#/definitions/ValidateAccountHolderResponseModel'
+      status:
+        type: string
+        enum:
+        - KO
+        - OK
+        - PENDING
+    title: ResponseModel<ValidateAccountHolderResponseModel>
+  ValidateAccountHolderRequestModel:
+    type: object
+    required:
+    - account
+    - accountHolder
+    properties:
+      account:
+        description: The account information
+        $ref: '#/definitions/AccountRequestModel'
+      accountHolder:
+        description: The account holder information
+        $ref: '#/definitions/AccountHolderRequestModel'
+    title: ValidateAccountHolderRequestModel
+  ValidateAccountHolderResponseModel:
+    type: object
+    properties:
+      account:
+        description: The account information.
+        $ref: '#/definitions/AccountResponseModel'
+      accountHolder:
+        description: The account holder information.
+        $ref: '#/definitions/AccountHolderResponseModel'
+      bankInfo:
+        description: The bank information.
+        $ref: '#/definitions/BankInfoModel'
+      validationStatus:
+        type: string
+        description: The validation result.
+        enum:
+        - KO
+        - OK
+    title: ValidateAccountHolderResponseModel
