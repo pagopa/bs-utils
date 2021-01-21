@@ -145,8 +145,10 @@ definitions:
         type: string
       panCode:
         type: string
+        description: "Encrypted value with PGP"
       expiringDate:
         type: string
+        description: "Encrypted value with PGP. Clear value pattern: yyyy-MM-dd"
       productType:
         type: string
         enum: [CREDIT, PREPAID, DEBIT, PRIVATIVE]
