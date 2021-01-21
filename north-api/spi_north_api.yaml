@@ -145,7 +145,7 @@ definitions:
         type: string
       panCode:
         type: string
-       description: "Encrypted value with PGP"
+        description: "Encrypted value with PGP"
       expiringDate:
         type: string
         description: "Encrypted value with PGP. Clear value pattern: yyyy-MM-dd"
